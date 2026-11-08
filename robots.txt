@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /resume-source/
+
+Sitemap: https://mohnish4code.github.io/sitemap.xml

@@ -13,7 +13,9 @@ It is hosted free on GitHub Pages straight from the `main` branch.
 | `index.html` | All content: hero, about, projects, skills, education, contact. Also the SEO and social-sharing tags in `<head>`. |
 | `style.css` | All styling. Colours, fonts and spacing are CSS variables at the top (`:root` = dark theme, `[data-theme="light"]` = light theme). |
 | `script.js` | Theme toggle (remembered in localStorage), mobile menu, active nav link on scroll, copy-email button. |
-| `resume.pdf` | The résumé the **Resume** button opens. Replace this file to update it, keeping the same name. |
+| `resume.pdf` | The résumé the **Resume** button opens. It is public, so it has no phone number or home address. |
+| `resume-source/resume.html` | Source for `resume.pdf`. Edit this, then regenerate the PDF (see below). |
+| `robots.txt`, `sitemap.xml` | Help search engines find and index the site. Update `lastmod` in the sitemap after big changes. |
 | `assets/favicon.svg` | Browser-tab icon. |
 | `assets/og-image.png` | 1200×630 preview image shown when the link is shared on LinkedIn, WhatsApp and similar apps. |
 | `assets/projects/*.webp` | Project screenshots (1200×750 WebP, taken from each project's repo). |
@@ -34,6 +36,17 @@ It is hosted free on GitHub Pages straight from the `main` branch.
    git push
    ```
 4. The live site updates within a minute or two. Hard-refresh (Ctrl+Shift+R) if you still see the old version.
+
+### Updating the résumé
+
+1. Edit `resume-source/resume.html` (keep it to one A4 page).
+2. Regenerate the PDF from the repo root in Command Prompt:
+   ```
+   "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless=new --no-pdf-header-footer --print-to-pdf="%CD%\resume.pdf" "%CD%\resume-source\resume.html"
+   ```
+3. Open `resume.pdf` to check it, then commit and push as above.
+
+Never put a phone number or home address in the public résumé. Send a fuller version directly to recruiters when they ask.
 
 ### Common edits
 
