@@ -148,6 +148,179 @@
         </figure>
       </div>
     </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">01 / about</p>
+          <h2 class="section-title" id="about-title">Models that survive messy, real data.</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-text">
+            <p>I'm a final-year <strong>B.Tech Electronics and Computer Engineering</strong> student at <strong>MIT ADT University, Pune</strong> (2023–2027). I like problems where models meet messy real data: blurry number plates, millions of unstructured log lines, noisy stock prices.</p>
+            <p>I care about <strong>honest evaluation</strong>: chronological splits, simple baselines, held-out sets and measured numbers. If a deep model doesn't beat a decision tree, my README says so.</p>
+            <p>I'm going deeper into <strong>MLOps</strong>: serving models with FastAPI, packaging them with Docker, testing them in GitHub Actions and tracking experiments with MLflow.</p>
+          </div>
+
+          <dl class="facts">
+            <div class="fact"><dt>Degree</dt><dd>B.Tech ECE<br><span style="color:var(--muted);font-weight:500">MIT ADT · 2027</span></dd></div>
+            <div class="fact"><dt>CGPA</dt><dd class="big">7.78<small> / 10</small></dd></div>
+            <div class="fact"><dt>Focus</dt><dd>CV · Time series · Anomalies</dd></div>
+            <div class="fact"><dt>Open to</dt><dd>ML / Software roles, 2027</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">02 / projects</p>
+          <h2 class="section-title" id="projects-title">Selected work</h2>
+          <p class="section-sub">Each project is shipped end to end with an API, a web app, tests and CI, and evaluated on data it never saw during development.</p>
+        </div>
+
+        <div class="projects">
+          <!-- Vehicle Number Plate Detection -->
+          <article class="project" aria-labelledby="p-plate">
+            <div class="project-body">
+              <div class="project-top">
+                <span class="badge">Shipped · upgraded</span>
+                <span class="project-kicker">computer vision · OCR</span>
+              </div>
+              <h3 id="p-plate">Vehicle Number Plate Detection</h3>
+              <p class="project-desc">Detects Indian number plates with a custom-trained YOLOv8 model, reads them with plate-aware OCR and logs confirmed plates to Google Sheets. You can scan plates from a phone camera in the browser.</p>
+              <ul class="bullets">
+                <li>YOLOv8n fine-tuned for one-class plate detection at 640&nbsp;px.</li>
+                <li>Replaced EasyOCR with PaddleOCR (PP-OCRv4). Decoding is constrained to valid Indian formats: state code, RTO digits, series and number, Bharat (BH) series and two-row plates.</li>
+                <li>Unclear reads are flagged for review before saving. The Google Sheets log has duplicate protection and retries.</li>
+                <li>Moved from Streamlit to a FastAPI backend and a mobile-friendly React + TypeScript app, with Docker and CI.</li>
+              </ul>
+              <div class="metrics">
+                <div class="metric"><b>0.994</b><span>mAP@50 (val)</span></div>
+                <div class="metric"><b>85.3%</b><span>plates exact on held-out set, up from 54.4%</span></div>
+                <div class="metric"><b>6.3%</b><span>character error rate (held-out)</span></div>
+                <div class="metric"><b>0</b><span>wrong reads auto-accepted (of 68)</span></div>
+              </div>
+              <ul class="chips" aria-label="Tech stack">
+                <li class="chip">Python</li><li class="chip">YOLOv8</li><li class="chip">PaddleOCR</li><li class="chip">OpenCV</li><li class="chip">FastAPI</li><li class="chip">React</li><li class="chip">Docker</li>
+              </ul>
+              <div class="project-links">
+                <a class="btn btn-sm" href="https://github.com/mohnish4code/Vehicle-Detection-System" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg>View repo</a>
+              </div>
+            </div>
+            <div class="project-media">
+              <figure class="shot">
+                <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                <img src="assets/projects/vehicle-plate.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Vehicle Tracker web app showing three detected Indian number plates with detection and OCR confidence, and a green box drawn around a BH-series plate">
+                <figcaption>Scan results: plates found, confidence per step, review before saving.</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <!-- Multi-Module Stock Prediction -->
+          <article class="project" aria-labelledby="p-stock">
+            <div class="project-body">
+              <div class="project-top">
+                <span class="badge">Shipped · v2</span>
+                <span class="project-kicker">time series · NLP</span>
+              </div>
+              <h3 id="p-stock">Multi-Module Stock Prediction</h3>
+              <p class="project-desc">AlphaStream forecasts the next day for 10 NSE large caps. It combines a forecasting model, technical rules and live FinBERT news sentiment, and a decision engine turns the three into one BUY / HOLD / SELL call.</p>
+              <ul class="bullets">
+                <li>Compared ARIMA, XGBoost, LSTM and Transformer models, with and without news features. XGBoost + FinBERT sentiment won the walk-forward backtest and is the model served.</li>
+                <li>Leakage-free evaluation: expanding-window chronological folds with a 5-row embargo and scalers fit per fold. Shuffling the target gives 49.9% accuracy, as it should.</li>
+                <li>Benchmarked against random-walk, persistence, majority-direction and buy-and-hold baselines.</li>
+                <li>FastAPI service, React + TypeScript terminal UI, MLflow tracking, Optuna tuning, Docker and GitHub Actions CI.</li>
+              </ul>
+              <p class="finding"><b>Honest result:</b> no model had a reliable edge on next-day direction (49–51% accuracy), and buy-and-hold beat every model on return and Sharpe. The repo reports this rather than hiding it.</p>
+              <div class="metrics">
+                <div class="metric"><b>10</b><span>NSE stocks</span></div>
+                <div class="metric"><b>1,512</b><span>out-of-sample trading days per stock</span></div>
+                <div class="metric"><b>6 vs 4</b><span>models vs baselines</span></div>
+                <div class="metric"><b>79</b><span>pytest tests</span></div>
+              </div>
+              <ul class="chips" aria-label="Tech stack">
+                <li class="chip">Python</li><li class="chip">XGBoost</li><li class="chip">PyTorch</li><li class="chip">FinBERT</li><li class="chip">FastAPI</li><li class="chip">React</li><li class="chip">MLflow</li><li class="chip">Docker</li>
+              </ul>
+              <div class="project-links">
+                <a class="btn btn-sm" href="https://github.com/mohnish4code/Multi-Module-Stock-Prediction" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg>View repo</a>
+              </div>
+            </div>
+            <div class="project-media">
+              <figure class="shot">
+                <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                <img src="assets/projects/stock-alphastream.webp" width="1200" height="750" loading="lazy" decoding="async" alt="AlphaStream dashboard for TCS showing a HOLD decision, predicted close, news sentiment, risk level and a candlestick price chart with forecast">
+                <figcaption>Analysis view: module signals, final call and price forecast.</figcaption>
+              </figure>
+            </div>
+          </article>
+
+          <!-- System Log Anomaly Detection -->
+          <article class="project" aria-labelledby="p-logs">
+            <div class="project-body">
+              <div class="project-top">
+                <span class="badge">Complete</span>
+                <span class="project-kicker">anomaly detection · AIOps</span>
+              </div>
+              <h3 id="p-logs">System Log Anomaly Detection</h3>
+              <p class="project-desc">Flags abnormal behaviour in large-scale systems from their raw log files, so engineers hear about failures before they turn into outages. Every alert links back to the log lines behind it.</p>
+              <ul class="bullets">
+                <li>Parses 15.9M raw log lines from the HDFS and BGL datasets into event templates with Drain, then groups them into sessions and time windows.</li>
+                <li>Benchmarked 7 detectors (keyword rule, PCA, Isolation Forest, supervised models, a DeepLog-style LSTM and a causal Transformer) on chronological 60/20/20 splits.</li>
+                <li>Streaming replay parses, groups and scores lines online, with detection delay measured. Adding warm-up state took HDFS precision from 0.071 to 0.968.</li>
+                <li>FastAPI backend and React dashboard with explainable alerts. Includes Docker, MLflow, GitHub Actions and 45 automated tests.</li>
+              </ul>
+              <p class="finding"><b>Finding:</b> the deep sequence models did not beat simpler methods on the test period. A decision tree reached 0.995 F1 on HDFS, and PCA was the best label-free model.</p>
+              <div class="metrics">
+                <div class="metric"><b>15.9M</b><span>log lines processed</span></div>
+                <div class="metric"><b>0.998</b><span>parsing accuracy (HDFS)</span></div>
+                <div class="metric"><b>0.982</b><span>streaming F1 (HDFS)</span></div>
+                <div class="metric"><b>7</b><span>models benchmarked</span></div>
+              </div>
+              <ul class="chips" aria-label="Tech stack">
+                <li class="chip">Python</li><li class="chip">PyTorch</li><li class="chip">Scikit-learn</li><li class="chip">Drain3</li><li class="chip">FastAPI</li><li class="chip">React</li><li class="chip">Docker</li>
+              </ul>
+              <div class="project-links">
+                <a class="btn btn-sm" href="https://github.com/mohnish4code/System-Log-Anomaly-Detection" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-github"/></svg>View repo</a>
+              </div>
+            </div>
+            <div class="project-media">
+              <figure class="shot">
+                <div class="shot-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+                <img src="assets/projects/log-anomaly.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Log Anomaly Detection dashboard in dark mode showing a live monitoring replay with 4,641 alerts, precision 0.968, recall 0.996 and an alerts-over-time chart">
+                <figcaption>Live monitoring replay on HDFS: alerts, precision, recall and detection delay.</figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+
+        <h3 class="more-title">More projects</h3>
+        <div class="mini-grid">
+          <a class="mini" href="https://github.com/mohnish4code/Question-Paper-Generator-using-RAG-and-LLM" target="_blank" rel="noopener">
+            <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+            <h4>Question Paper Generator (RAG)</h4>
+            <p>Turns a PDF or pasted notes into a structured exam paper. FAISS semantic search retrieves the relevant chunks and Google Gemini writes the questions. Exports to PDF.</p>
+            <ul class="chips" aria-label="Tech stack"><li class="chip">FAISS</li><li class="chip">Sentence Transformers</li><li class="chip">Gemini</li><li class="chip">Streamlit</li></ul>
+          </a>
+          <a class="mini" href="https://github.com/mohnish4code/Credit-Risk-Prediction-Project" target="_blank" rel="noopener">
+            <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+            <h4>Credit Risk Prediction</h4>
+            <p>Classifies loan applicants as high or low risk with a tuned XGBoost model. Preprocessing is wrapped in a scikit-learn Pipeline so training and inference stay consistent.</p>
+            <ul class="chips" aria-label="Tech stack"><li class="chip">Scikit-learn</li><li class="chip">XGBoost</li><li class="chip">Streamlit</li></ul>
+          </a>
+          <a class="mini" href="https://github.com/mohnish4code/Customer-Churn-Prediction" target="_blank" rel="noopener">
+            <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
+            <h4>Customer Churn Prediction</h4>
+            <p>A deep neural network that predicts whether a bank customer will leave, trained on the Kaggle bank churn dataset after encoding and scaling.</p>
+            <ul class="chips" aria-label="Tech stack"><li class="chip">TensorFlow</li><li class="chip">Keras</li><li class="chip">Pandas</li></ul>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
 </body>
 </html>
