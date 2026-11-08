@@ -534,6 +534,7 @@ p { margin: 0; }
   margin-bottom: 6px;
 }
 .fact dd { margin: 0; font-weight: 600; line-height: 1.4; }
+.fact dd .sub { color: var(--muted); font-weight: 500; }
 .fact dd.big { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; }
 .fact dd.big small { font-size: 0.9rem; color: var(--muted); font-weight: 500; }
 
